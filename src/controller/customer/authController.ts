@@ -20,11 +20,11 @@
 //   constructor(private _customerAuthService: ICustomerAuthService) {}
 
 //   register = async (req: Request, res: Response) => {
-//     const { userName, email, password } = req.body;
+//     const { userName, phoneNumber, password } = req.body;
 //     try {
 //       const { user, token, refreshToken } = await this._customerAuthService.registerUser(
 //         userName,
-//         email,
+//         phoneNumber,
 //         password,
 //       );
 
