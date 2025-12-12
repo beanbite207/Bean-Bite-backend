@@ -9,7 +9,6 @@ const categorySchema = new Schema<ICategory>(
             unique: true,
             trim: true,
         },
-
         image: {
             type: String,
             default: null,
@@ -25,7 +24,6 @@ const categorySchema = new Schema<ICategory>(
             lowercase: true,
             trim: true,
         },
-
         status: {
             type: Boolean,
             default: true,
