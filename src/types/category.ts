@@ -1,6 +1,15 @@
 import { Document } from "mongoose";
 
-export interface ICategory extends Document {
+export interface ICategory  {
+    categoryName: string;
+    image: string;
+    slug: string;
+    description: string;
+    status: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+}
+export interface ICategoryDocument extends Document {
     categoryName: string;
     image: string;
     slug: string;
