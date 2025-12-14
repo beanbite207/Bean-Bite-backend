@@ -22,5 +22,5 @@ export interface IProductDocument extends Document {
   images: string[];
   status: boolean;
   createdAt: Date;
-  updatedAt: Date;
+  updatedAt: Date
 }
