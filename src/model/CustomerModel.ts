@@ -1,14 +1,14 @@
 import { model, Schema } from "mongoose";
-import { ICustomer } from "../types/customer";
+import {  ICustomerDocument } from "../types/customer";
 
-const customerSchema = new Schema<ICustomer>(
+const customerSchema = new Schema<ICustomerDocument>(
   {
     fullName: {
       type: String,
       required: true,
       trim: true,
     },
-    mobile: {
+    phoneNumber: {
       type: String,
       required: true,
       unique: true,
@@ -36,5 +36,5 @@ const customerSchema = new Schema<ICustomer>(
   }
 );
 
-export const Customer = model<ICustomer>("Customer", customerSchema);
+export const Customer = model<ICustomerDocument>("Customer", customerSchema);
 

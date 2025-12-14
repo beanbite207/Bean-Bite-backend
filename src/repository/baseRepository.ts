@@ -1,7 +1,7 @@
-import { Model, Types, Document } from "mongoose";
+import { Model, Types, UpdateQuery } from "mongoose";
 
-export abstract class BaseRepository<T extends Document> {
-  constructor(protected readonly model: Model<T>) {}
+export class BaseRepository<TSchema> {
+  constructor(protected readonly model: Model<TSchema>) { }
 
   findAll() {
     return this.model.find().exec();
@@ -10,12 +10,12 @@ export abstract class BaseRepository<T extends Document> {
   findById(id: string | Types.ObjectId) {
     return this.model.findById(id).exec();
   }
-
-  create(data: any) {
-    return this.model.create(data);
+  async create(data: Partial<TSchema>) {
+    const doc = new this.model(data);
+    return await doc.save();
   }
 
-  update(id: string | Types.ObjectId, data: Partial<T>) {
+  update(id: string | Types.ObjectId, data: UpdateQuery<TSchema>) {
     return this.model.findByIdAndUpdate(id, data, { new: true }).exec();
   }
 

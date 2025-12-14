@@ -1,9 +1,18 @@
 import { Document } from "mongoose";
-export interface ICustomer extends Document {
+export interface ICustomerDocument extends Document {
   fullName: string;
-  mobile: string;
+  phoneNumber: string;
   password: string;
   isAdmin:boolean
+  otp?: string;
+  otpExpires?: Date;
+}
+
+export interface ICustomer {
+  fullName: string;
+  phoneNumber: string;
+  password: string;
+  isAdmin: boolean;
   otp?: string;
   otpExpires?: Date;
 }

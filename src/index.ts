@@ -24,6 +24,8 @@ app.use(cors({
     credentials: true,
 }));
 
+
+
 app.use('/api/customer',customerRouter)
 app.use('/api/admin',adminRouter)
 
