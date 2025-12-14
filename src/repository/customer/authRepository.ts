@@ -1,10 +1,12 @@
-// import { Customer } from "../../model/CustomerModel";
-// import { BaseRepository } from "../baseRepository";
-// import { ICustomer } from "../../types/customer";
-// import { ICustomerRepo } from "../../interface/customer/authServiceInterface";
+import { BaseRepository } from "../baseRepository";
+import { ICustomerRepo } from "../../interface/service/customer/authServiceInterface";
+import { ICustomerDocument } from "../../types/customer";
+import { Customer } from "../../model/CustomerModel";
 
-// export class CustomerRepo extends BaseRepository<ICustomer> implements ICustomerRepo{
-//     constructor(){
-//         super(Customer)
-//     }
-// }
+
+
+export class CustomerRepo extends BaseRepository<ICustomerDocument> implements ICustomerRepo {
+    constructor() {
+        super(Customer)
+    }
+}

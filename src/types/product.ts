@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
-import  { Document } from "mongoose";
+import { Document } from "mongoose";
 
 
-export interface IProduct extends Document {
+export interface IProduct {
   name: string;
   slug: string;
   category: mongoose.Types.ObjectId;
@@ -12,4 +12,15 @@ export interface IProduct extends Document {
   status: boolean;
   createdAt: Date;
   updatedAt: Date;
+}
+export interface IProductDocument extends Document {
+  name: string;
+  slug: string;
+  category: mongoose.Types.ObjectId;
+  price: number;
+  description: string;
+  images: string[];
+  status: boolean;
+  createdAt: Date;
+  updatedAt: Date
 }

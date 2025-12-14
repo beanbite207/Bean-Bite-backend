@@ -5,7 +5,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import logger from "./logger";
 import connectDB from "./config/db";
-import customerRouter from "./routes/customerRouter";
+// import customerRouter from "./routes/customerRouter";
 import adminRouter from "./routes/adminRouter";
 
 
@@ -24,7 +24,9 @@ app.use(cors({
     credentials: true,
 }));
 
-app.use('/api/customer',customerRouter)
+
+
+// app.use('/api/customer',customerRouter)
 app.use('/api/admin',adminRouter)
 
 const PORT = process.env.PORT||3000 ;
