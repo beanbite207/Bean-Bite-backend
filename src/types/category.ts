@@ -2,7 +2,7 @@ import { Document } from "mongoose";
 
 export interface ICategory extends Document {
     categoryName: string;
-    image: string;
+    image: string 
     slug: string;
     description: string;
     status: boolean;
