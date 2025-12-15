@@ -7,7 +7,7 @@ if (
   !process.env.CLOUDINARY_API_KEY ||
   !process.env.CLOUDINARY_API_SECRET
 ) {
-  throw new Error("❌ Cloudinary env variables missing");
+  throw new Error(" Cloudinary env variables missing");
 }
 
 cloudinary.config({

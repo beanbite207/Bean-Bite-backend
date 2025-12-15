@@ -1,9 +1,15 @@
 import { Router } from "express";
-import CategoryController from "../controller/admin/categoryController";
 import { upload } from "../config/multer";
 import { CategoryRepository } from "../repository/admin/categoryRepository";
+import { CategoryService } from "../service/admin/categoryService";
+import { CategoryController } from "../controller/admin/categoryController";
 const router = Router();
-const categoryRepository=new CategoryRepository()
-router.post("/categories",  upload.single("image"),  CategoryController.create);
-
+const categoryRepository= new CategoryRepository()
+const categoryService= new CategoryService(categoryRepository)
+const categoryController=new CategoryController(categoryService)
+router.post(
+  "/categories",
+  upload.single("image"),
+  categoryController.create.bind(categoryController)
+);
 export default router;

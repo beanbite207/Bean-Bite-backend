@@ -1,12 +1,15 @@
 import { Request, Response } from "express";
-import categoryService from "../../service/admin/categoryService";
+import ICategoryServiceInteface from "../../interface/service/admin/ICategoryService";
 
-class CategoryController {
-  async create(req: Request, res: Response): Promise<void> {
+export class CategoryController {
+  constructor(private _categoryService:ICategoryServiceInteface){
+
+  }
+  async create(req: Request, res: Response){
     try {
       const { categoryName, description, slug } = req.body;
-      console.log(req.file)
-
+    
+         console.log(req.file)
       if (!categoryName || !description) {
         res.status(400).json({
           success: false,
@@ -23,11 +26,11 @@ class CategoryController {
         return;
       }
 
-      const category = await categoryService.createCategory({
+      const category = await this._categoryService.createCategory({
         categoryName,
         description,
         slug,
-        imageBuffer: req.file.buffer,
+        imageBuffer:req.file.buffer,
       });
 
       res.status(201).json({
@@ -44,4 +47,3 @@ class CategoryController {
   }
 }
 
-export default new CategoryController();
