@@ -1,15 +1,16 @@
 import { Request, Response } from "express";
 import ICategoryServiceInteface from "../../interface/service/admin/ICategoryService";
+import { Types } from "mongoose";
 
 export class CategoryController {
-  constructor(private _categoryService:ICategoryServiceInteface){
+  constructor(private _categoryService: ICategoryServiceInteface) {
 
   }
-  async create(req: Request, res: Response){
+  async create(req: Request, res: Response) {
     try {
       const { categoryName, description, slug } = req.body;
-    
-         console.log(req.file)
+
+      console.log(req.file)
       if (!categoryName || !description) {
         res.status(400).json({
           success: false,
@@ -30,7 +31,7 @@ export class CategoryController {
         categoryName,
         description,
         slug,
-        imageBuffer:req.file.buffer,
+        imageBuffer: req.file.buffer,
       });
 
       res.status(201).json({
@@ -45,5 +46,63 @@ export class CategoryController {
       });
     }
   }
+  getCategoryBySlug = async (req: Request, res: Response) => {
+    try {
+      const { slug } = req.params;
+      console.log("controller slug:", slug);
+
+      const category =
+        await this._categoryService.getCategoryForEdit(slug);
+
+      res.status(200).json({
+        success: true,
+        data: category,
+      });
+    } catch (error: unknown) {
+      res.status(400).json({
+        success: false,
+        message:
+          error instanceof Error
+            ? error.message
+            : "Something went wrong",
+      });
+    }
+  };
+  editCategory = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      const { categoryName, description, status, slug } = req.body;
+
+      if (!Types.ObjectId.isValid(id)) {
+        res.status(400).json({ message: "Invalid category ID" });
+        return;
+      }
+
+      const updatedData: any = {
+        categoryName,
+        description,
+        status,
+        slug,
+      };
+
+      if (req.file) {
+        updatedData.imageBuffer = req.file.buffer;
+      }
+
+      const updatedCategory =
+        await this._categoryService.updateCategory(id, updatedData);
+
+      res.status(200).json({
+        success: true,
+        message: "Category updated successfully",
+        data: updatedCategory,
+      });
+    } catch (error: any) {
+      res.status(400).json({
+        success: false,
+        message: error.message || "Category update failed",
+      });
+    }
+  };
 }
 

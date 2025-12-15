@@ -24,3 +24,10 @@ export interface CreateCategoryDTO {
   slug:string;
   imageBuffer: Buffer;
 }
+export interface UpdateCategoryDTO {
+  categoryName?: string;
+  description?: string;
+  status?: boolean;
+  slug?: string;
+  imageBuffer?: Buffer;
+}

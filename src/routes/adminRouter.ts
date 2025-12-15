@@ -12,4 +12,11 @@ router.post(
   upload.single("image"),
   categoryController.create.bind(categoryController)
 );
+router.get("/categories/:slug", categoryController.getCategoryBySlug);
+router.put(
+  "/categories/:id",
+  upload.single("image"),
+  categoryController.editCategory
+);
+
 export default router;
