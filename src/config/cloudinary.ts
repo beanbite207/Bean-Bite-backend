@@ -1,21 +1,19 @@
+import dotenv from "dotenv";
 import { v2 as cloudinary } from "cloudinary";
+dotenv.config();
+
+if (
+  !process.env.CLOUDINARY_CLOUD_NAME ||
+  !process.env.CLOUDINARY_API_KEY ||
+  !process.env.CLOUDINARY_API_SECRET
+) {
+  throw new Error("❌ Cloudinary env variables missing");
+}
 
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME!,
-  api_key: process.env.CLOUDINARY_API_KEY!,
-  api_secret: process.env.CLOUDINARY_API_SECRET!,
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export const uploadToCloudinary = (
-  buffer: Buffer,
-  folder: string
-): Promise<string> => {
-  return new Promise((resolve, reject) => {
-    cloudinary.uploader
-      .upload_stream({ folder }, (error, result) => {
-        if (error) return reject(error);
-        resolve(result?.secure_url as string);
-      })
-      .end(buffer);
-  });
-};
+export default cloudinary;

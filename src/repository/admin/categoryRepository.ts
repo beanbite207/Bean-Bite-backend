@@ -1,19 +1,18 @@
+import { Model } from "mongoose";
 import { BaseRepository } from "../baseRepository";
-import CategoryModel from "../../model/CategoryModel";
 import { ICategoryDocument } from "../../types/category";
+import ICategoryRepository from "../../interface/repositories/admin/ICategoryRepository";
 
-class CategoryRepository extends BaseRepository<ICategoryDocument> {
-  constructor() {
-    super(CategoryModel);
+export class CategoryRepository extends BaseRepository<ICategoryDocument> implements ICategoryRepository {
+  constructor(categoryModel: Model<ICategoryDocument>) {
+    super(categoryModel);
   }
 
-  findBySlug(slug: string) {
+  findBySlug(slug: string): Promise<ICategoryDocument | null> {
     return this.model.findOne({ slug }).exec();
   }
 
-  findByName(categoryName: string) {
+  findByName(categoryName: string): Promise<ICategoryDocument | null> {
     return this.model.findOne({ categoryName }).exec();
   }
 }
-
-export default new CategoryRepository();

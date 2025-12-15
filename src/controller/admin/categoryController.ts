@@ -4,7 +4,7 @@ import categoryService from "../../service/admin/categoryService";
 class CategoryController {
   async create(req: Request, res: Response): Promise<void> {
     try {
-      const { categoryName, description,slug } = req.body;
+      const { categoryName, description, slug } = req.body;
       console.log(req.file)
 
       if (!categoryName || !description) {
@@ -24,9 +24,9 @@ class CategoryController {
       }
 
       const category = await categoryService.createCategory({
-      categoryName,
-      description,
-      slug,
+        categoryName,
+        description,
+        slug,
         imageBuffer: req.file.buffer,
       });
 

@@ -18,3 +18,9 @@ export interface ICategoryDocument extends Document {
     createdAt: Date;
     updatedAt: Date;
 }
+export interface CreateCategoryDTO {
+  categoryName: string;
+  description: string;
+  slug:string;
+  imageBuffer: Buffer;
+}
