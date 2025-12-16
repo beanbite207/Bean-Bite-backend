@@ -31,3 +31,20 @@ export interface UpdateCategoryDTO {
   slug?: string;
   imageBuffer?: Buffer;
 }
+export interface UpdateCategoryStatusDTO {
+  status: boolean;
+}
+export interface PaginatedCategories {
+  data: ICategory[]; 
+  total: number;
+  page: number;
+  limit: number;
+}
+
+export interface PaginatedCategoryResponse {
+  data: ICategory[];
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}

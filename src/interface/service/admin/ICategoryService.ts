@@ -1,12 +1,13 @@
-import { CreateCategoryDTO, UpdateCategoryDTO, ICategory } from "../../../types/category";
+import { CreateCategoryDTO, UpdateCategoryDTO, ICategory, UpdateCategoryStatusDTO, PaginatedCategories, PaginatedCategoryResponse } from "../../../types/category";
 
 export default interface ICategoryServiceInterface {
   createCategory(data: CreateCategoryDTO): Promise<ICategory>;
-
   getCategoryForEdit(slug: string): Promise<ICategory>;
-
-  updateCategory(
-    id: string,
-    data: UpdateCategoryDTO
-  ): Promise<ICategory>;
+  updateCategory(id: string,data: UpdateCategoryDTO ): Promise<ICategory>;
+getAllCategories(
+  page: number,
+  limit: number,
+  search?: string
+): Promise<PaginatedCategoryResponse>;
+toggleCategoryStatus(id: string): Promise<ICategory>;
 }

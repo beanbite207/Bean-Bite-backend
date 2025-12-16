@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
 import ICategoryServiceInteface from "../../interface/service/admin/ICategoryService";
 import { Types } from "mongoose";
+import ICategoryController from "../../interface/controller/admin/ICategoryController";
 
-export class CategoryController {
+export class CategoryController implements ICategoryController {
   constructor(private _categoryService: ICategoryServiceInteface) {
 
   }
-  async create(req: Request, res: Response) {
+  create=async(req: Request, res: Response) =>{
     try {
       const { categoryName, description, slug } = req.body;
 
-      console.log(req.file)
       if (!categoryName || !description) {
         res.status(400).json({
           success: false,
@@ -101,6 +101,50 @@ export class CategoryController {
       res.status(400).json({
         success: false,
         message: error.message || "Category update failed",
+      });
+    }
+  };
+ getAllCategories = async (req: Request, res: Response) => {
+  try {
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 6;
+    const search = req.query.search as string | undefined;
+
+    const categories =await this._categoryService.getAllCategories(page, limit,search);
+
+    res.status(200).json({
+      success: true,
+      ...categories
+    });
+  } catch (error: unknown) {
+    res.status(500).json({
+      success: false,
+      message:
+        error instanceof Error
+          ? error.message
+          : "Something went wrong",
+    });
+  }
+};
+
+  toggleCategoryStatus = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+       console.log(id)
+      const updated =await this._categoryService.toggleCategoryStatus(id);
+
+      res.status(200).json({
+        success: true,
+        message: "Category status toggled",
+        data: updated,
+      });
+    } catch (error: unknown) {
+      res.status(400).json({
+        success: false,
+        message:
+          error instanceof Error
+            ? error.message
+            : "Something went wrong",
       });
     }
   };

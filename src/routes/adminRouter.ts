@@ -13,10 +13,15 @@ router.post(
   categoryController.create.bind(categoryController)
 );
 router.get("/categories/:slug", categoryController.getCategoryBySlug);
+router.get("/allCategories", categoryController.getAllCategories);
 router.put(
   "/categories/:id",
   upload.single("image"),
   categoryController.editCategory
+);
+router.patch(
+  "/categories/:id/toggle-status",
+  categoryController.toggleCategoryStatus
 );
 
 export default router;
