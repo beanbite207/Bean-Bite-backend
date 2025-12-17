@@ -22,5 +22,5 @@ export class BaseRepository<T extends Document> {
 
   delete(id: string | Types.ObjectId) {
     return this.model.findByIdAndDelete(id).exec();
-  }
+  }
 }

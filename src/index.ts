@@ -1,19 +1,19 @@
-import express from "express";
 import dotenv from "dotenv";
+import express from "express";
 import http from "http";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import logger from "./logger";
 import connectDB from "./config/db";
-import customerRouter from "./routes/customerRouter";
+// import customerRouter from "./routes/customerRouter";
 import adminRouter from "./routes/adminRouter";
+dotenv.config();
 
 
 connectDB()
 
 const app=express()
 const server=http.createServer(app)
-dotenv.config();
 
 app.use(cookieParser());
 app.use(express.urlencoded());
@@ -26,7 +26,7 @@ app.use(cors({
 
 
 
-app.use('/api/customer',customerRouter)
+// app.use('/api/customer',customerRouter)
 app.use('/api/admin',adminRouter)
 
 const PORT = process.env.PORT||3000 ;
